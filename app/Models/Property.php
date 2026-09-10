@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
-    /** @use HasFactory<PropertyFactory> */
-    use HasFactory;
-
     protected $fillable = [
         'name',
         'type',
@@ -29,18 +26,5 @@ class Property extends Model
         'cancellation_policy',
     ];
 
-    protected $casts = [
-        'price_per_month' => 'decimal:2',
-        'service_fee' => 'decimal:2',
-        'taxes' => 'decimal:2',
-        'rating' => 'decimal:1',
-    ];
-
-    /**
-     * Total price (rent + service fee + taxes).
-     */
-    public function getTotalAttribute(): string
-    {
-        return number_format((float) $this->price_per_month + (float) $this->service_fee + (float) $this->taxes, 2);
-    }
+    
 }

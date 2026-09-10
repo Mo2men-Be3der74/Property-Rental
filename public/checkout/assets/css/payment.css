@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #F8F7F5;
+    color: #1A1A1A;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.header {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E7E5E4;
+    padding: 2.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header > .back,
+.header > .title {
+    width: 100%;
+    max-width: 900px;
+}
+
+.header > .back {
+    margin-bottom: 1.25rem;
+}
+
+.back a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #F8F7F5;
+    border: 1px solid #E7E5E4;
+    color: #78716C;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.back a:hover {
+    color: #FFFFFF;
+    background-color: #FF8A4D;
+    border-color: #FF8A4D;
+    transform: translateX(-3px);
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+}
+
+.title h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    color: #1A1A1A;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.title .small {
+    font-size: 0.875rem;
+    color: #78716C;
+    margin-top: 0.625rem;
+    font-weight: 500;
+}
+
+.content {
+    width: 100%;
+    max-width: 900px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem 3.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.title-card {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 1rem;
+    padding: 1.5rem 1.75rem;
+    border: 1px solid #E7E5E4;
+    box-shadow: 0 14px 35px rgba(31, 28, 25, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.title-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(31, 28, 25, 0.12);
+}
+
+.title-card .location {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #1A1A1A;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.title-card .location i {
+    color: #FF8A4D;
+    font-size: 1.15rem;
+}
+
+.title-card .size {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #D86E3A;
+    background-color: #FFF0E9;
+    border: 1px solid #FFD8C7;
+    border-radius: 0.5rem;
+    padding: 0.45rem 0.85rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.title-card .size:hover {
+    background-color: #FFE2D4;
+    border-color: #FF8A4D;
+}
+
+.title-card .size i {
+    color: #FF8A4D;
+    font-size: 0.875rem;
+}
+
+.order-summary {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 1rem;
+    padding: 2rem;
+    border: 1px solid #E7E5E4;
+    box-shadow: 0 14px 35px rgba(31, 28, 25, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.order-summary:hover {
+    box-shadow: 0 18px 40px rgba(31, 28, 25, 0.12);
+}
+
+.order-summary > .title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #1A1A1A;
+    letter-spacing: -0.03em;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #E7E5E4;
+}
+
+.order-summary .total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 0;
+    border-top: 1px solid #E7E5E4;
+    border-bottom: 1px solid #E7E5E4;
+    margin-top: 0.5rem;
+}
+
+.order-summary .total .label {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #1A1A1A;
+}
+
+.order-summary .total .price {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #FF8A4D;
+    letter-spacing: -0.03em;
+}
+
+.order-summary .in,
+.order-summary .out {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.15rem;
+    background-color: #F8F7F5;
+    border: 1px solid #E7E5E4;
+    border-radius: 0.75rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #1A1A1A;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.order-summary .in:hover,
+.order-summary .out:hover {
+    background-color: #FFF0E9;
+    border-color: #FF8A4D;
+    color: #D86E3A;
+}
+
+.order-summary .size {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #78716C;
+    background-color: #F8F7F5;
+    border: 1px solid #E7E5E4;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.order-summary .size:hover {
+    background-color: #FFF0E9;
+    border-color: #FF8A4D;
+    color: #D86E3A;
+}
+
+.content > form {
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    margin-top: 0.5rem;
+}
+
+.content > form input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    height: 56px;
+    border-radius: 0.75rem;
+    background-color: #FF8A4D;
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: -0.01em;
+    box-shadow: 0 4px 14px rgba(255, 138, 77, 0.28);
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.content form input[type="submit"]:hover {
+    background-color: #EF7940;
+    box-shadow: 0 6px 20px rgba(255, 138, 77, 0.38);
+    transform: translateY(-2px);
+}
+
+.content form input[type="submit"]:active {
+    transform: translateY(0) scale(0.99);
+}

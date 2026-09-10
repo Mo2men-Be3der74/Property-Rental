@@ -19,6 +19,9 @@ return new class extends Migration
             $table->foreignId('tenant_id')
                   ->constrained('users', 'user_id')
                   ->onDelete('cascade');
+            $table->foreignId('landlord_id')
+                  ->constrained('users', 'user_id')
+                  ->onDelete('cascade');
             $table->date('start_date');
             $table->date('end_date');
             $table->decimal('total_price');
