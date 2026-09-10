@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace Database\Seeders;
 
@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([PropertySeeder::class]);
         // User::factory(10)->create();
 
         User::factory()->create([
@@ -23,3 +24,4 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 }
+
