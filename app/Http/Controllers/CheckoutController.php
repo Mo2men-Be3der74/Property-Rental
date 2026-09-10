@@ -48,7 +48,7 @@ class CheckoutController extends Controller
             'end_date' => $data['end_date'],
             'total_price' => $request->totalPrice,
             'flat_id' => $id,
-            'landlord_id' => $flat->owner_id ?? 4,
+            'landlord_id' => $flat->owner_id,
             'tenant_id' => 3,
             'status' => 'completed',
         ];
@@ -61,7 +61,7 @@ class CheckoutController extends Controller
             'date' => now(),
         ];
 
-        $reciept = Reciept::create($reciept);
+        Reciept::create($reciept);
 
         return redirect()->route('welcome')->with('success', 'Payment successful! Transaction ID: ' . $transaction->transaction_id);
 
