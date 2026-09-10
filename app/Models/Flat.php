@@ -16,4 +16,8 @@ class Flat extends Model
         'location',
         'img',
     ];
+    // public function owner()
+    // {
+    //     return $this->belongsTo(User::class, 'owner_id', 'user_id');
+    // }
 }
