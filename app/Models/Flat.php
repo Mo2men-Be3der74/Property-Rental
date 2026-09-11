@@ -16,8 +16,17 @@ class Flat extends Model
         'location',
         'img',
     ];
-    // public function owner()
-    // {
-    //     return $this->belongsTo(User::class, 'owner_id', 'user_id');
-    // }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id', 'user_id');
+    }
+
+    public function getPhotoUrlAttribute()
+    {
+        if (str_starts_with($this->img, 'images/')) {
+            return asset('storage/' . $this->img);
+        }
+        return asset($this->img);
+    }
 }
