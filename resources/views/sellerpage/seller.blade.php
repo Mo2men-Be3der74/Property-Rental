@@ -9,7 +9,6 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
-    <link rel="stylesheet" href="{{ asset('checkout/assets/css/details.css') }}">
     <link rel="stylesheet" href="{{ asset('checkout/assets/css/seller.css') }}">
 </head>
 <body>
@@ -30,8 +29,8 @@
             </div>
             <div class="nav-actions">
                 <a href="#" class="nav-link">Explore</a>
-                <a href="#" class="nav-link">Become a Host</a>
-                <a href="#" class="nav-link active">Seller Hub</a>
+                <a href="{{route('seller.create')}}" class="nav-link">Become a Host</a>
+                <a href="{{ route('seller.index') }}" class="nav-link">Seller Hub</a>
                 <div class="superhost-badge">
                     <span class="dot-green"></span>
                     <span>Superhost Active</span>
@@ -74,10 +73,10 @@
                     <i class="fa-solid fa-arrow-down-to-bracket"></i>
                     <span>Export Report</span>
                 </button>
-                <button type="button" class="btn-primary-custom">
+                <a href="{{ route('seller.create') }}" class="btn-primary-custom">
                     <i class="fa-solid fa-plus"></i>
                     <span>New Listing</span>
-                </button>
+                </a>
             </div>
         </section>
 
@@ -92,10 +91,9 @@
                 <table class="listings-table">
                     <thead>
                         <tr>
-                            <th style="width: 50%;">PROPERTY</th>
+                            <th style="width: 60%;">PROPERTY</th>
                             <th style="width: 25%;">MONTHLY RATE</th>
-                            <th style="width: 15%;">VIEWS</th>
-                            <th style="width: 10%; text-align: right;">ACTIONS</th>
+                            <th style="width: 15%; text-align: right;">ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,14 +102,14 @@
                                 <td>
                                     <div class="property-info-cell">
                                         <img
-                                            src="{{ asset($flat->img) }}"
+                                            src="{{ $flat->photo_url }}"
                                             alt="{{ $flat->category }}"
                                             class="property-thumb"
                                         >
                                         <div class="property-details">
-                                            <a href="{{ route('checkout.details', ['flat' => $flat->flat_id]) }}" class="property-name">
+                                            <span class="property-name">
                                                 {{ $flat->category }}
-                                            </a>
+                                            </span>
                                             <div class="property-specs">
                                                 <i class="fa-solid fa-location-dot"></i>
                                                 <span>{{ $flat->location }} &bull; {{ $flat->size }} m²</span>
@@ -124,18 +122,24 @@
                                         ${{ number_format($flat->price_per_month, 0) }} <span class="period">/mo</span>
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="views-cell">-</div>
-                                </td>
                                 <td class="action-cell">
-                                    <a href="{{ route('checkout.details', ['flat' => $flat->flat_id]) }}" class="action-menu-btn" title="View Flat" aria-label="View Flat">
-                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                    </a>
+                                    <div class="action-buttons-group">
+                                        <a href="{{ route('seller.edit', ['flat' => $flat->flat_id]) }}" class="action-menu-btn edit-btn" title="Edit Listing" aria-label="Edit Listing">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <form action="{{ route('seller.destroy', ['flat' => $flat->flat_id]) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this listing');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="action-menu-btn delete-btn" title="Delete Listing" aria-label="Delete Listing">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" style="text-align: center; padding: 3.5rem 1rem; color: #78716C;">
+                                <td colspan="3" style="text-align: center; padding: 3.5rem 1rem; color: #78716C;">
                                     <div style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
                                         <div style="width: 48px; height: 48px; border-radius: 50%; background: #F8F7F5; display: flex; align-items: center; justify-content: center; color: #A8A29E; font-size: 1.25rem;">
                                             <i class="fa-solid fa-house"></i>
