@@ -15,9 +15,26 @@ class CheckoutController extends Controller
 {
     public function details($id)
     {
-        $data = Flat::findOrFail($id);
 
-        return view('checkout.details', compact('data'));
+        $flat = Flat::findOrFail($id);
+
+        $alreadyReserved = Transaction::where('flat_id', $flat->flat_id)->where('tenant_id', Auth::user()->user_id)->where('status', 'completed')->exists();
+
+        $someoneReserved = Transaction::where('flat_id', $flat->flat_id)->where('status', 'completed')->exists();
+
+        if ($alreadyReserved) {
+            return redirect()->route('welcome')->with('error', 'You have already reserved this flat.');
+        }
+
+        if ($someoneReserved) {
+            return redirect()->route('welcome')->with('error', 'This flat is already reserved by another tenant.');
+        }
+
+        if (Auth::user()->user_id === $flat->owner_id) {
+            return redirect()->route('welcome')->with('error', 'You cannot book your own flat.');
+        }
+
+        return view('checkout.details', compact('flat'));
     }
 
     public function payment($id, PaymentRequest $request) {
@@ -29,6 +46,24 @@ class CheckoutController extends Controller
         $months = $startDate->diffInMonths($endDate);
 
         $flat = Flat::findOrFail($id);
+
+        $alreadyReserved = Transaction::where('flat_id', $flat->flat_id)->where('tenant_id', Auth::user()->user_id)->where('status', 'completed')->exists();
+
+        $someoneReserved = Transaction::where('flat_id', $flat->flat_id)
+        ->where('status', 'completed')
+        ->exists();
+
+        if ($alreadyReserved) {
+            return redirect()->route('welcome')->with('error', 'You have already reserved this flat.');
+        }
+
+        if ($someoneReserved) {
+            return redirect()->route('welcome')->with('error', 'This flat is already reserved by another tenant.');
+        }
+
+        if (Auth::user()->user_id === $flat->owner_id) {
+            return redirect()->route('welcome')->with('error', 'You cannot book your own flat.');
+        }
 
         $pricePerMonth = (float) $flat->price_per_month;
 
@@ -43,13 +78,29 @@ class CheckoutController extends Controller
         $data = $request->all();
         $flat = Flat::findOrFail($id);
 
+        $alreadyReserved = Transaction::where('flat_id', $flat->flat_id)->where('tenant_id', Auth::user()->user_id)->where('status', 'completed')->exists();
+
+        $someoneReserved = Transaction::where('flat_id', $flat->flat_id)->where('status', 'completed')->exists();
+
+        if ($alreadyReserved) {
+            return redirect()->route('welcome')->with('error', 'You have already reserved this flat.');
+        }
+
+        if ($someoneReserved) {
+            return redirect()->route('welcome')->with('error', 'This flat is already reserved by another tenant.');
+        }
+
+        if (Auth::user()->user_id === $flat->owner_id) {
+            return redirect()->route('welcome')->with('error', 'You cannot book your own flat.');
+        }
+
         $transaction = [
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
             'total_price' => $request->totalPrice,
             'flat_id' => $id,
             'landlord_id' => $flat->owner_id,
-            'tenant_id' => 3,
+            'tenant_id' => Auth::user()->user_id,
             'status' => 'completed',
         ];
 
