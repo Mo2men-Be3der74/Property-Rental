@@ -110,5 +110,54 @@
 
 </div>
 
+<script>
+    var form = document.querySelector('form');
+
+    form.addEventListener('submit', function (event) {
+
+        var name = document.querySelector('input[name="name"]').value.trim();
+        var email = document.querySelector('input[name="email"]').value.trim();
+        var phone = document.querySelector('input[name="phone"]').value.trim();
+        var password = document.querySelector('input[name="password"]').value;
+        var confirmPassword = document.querySelector('input[name="password_confirmation"]').value;
+
+        if (name.length < 3) {
+            alert('Name must be at least 3 characters.');
+            event.preventDefault();
+            return;
+        }
+
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+            alert('Please enter a valid email address.');
+            event.preventDefault();
+            return;
+        }
+
+        if (phone !== '') {
+            var phonePattern = /^(010|011|012|015)[0-9]{8,}$/;
+
+            if (!phonePattern.test(phone)) {
+                alert('Please enter a valid Egyptian phone number.');
+                event.preventDefault();
+                return;
+            }
+        }
+
+        if (password.length < 8) {
+            alert('Password must be at least 8 characters.');
+            event.preventDefault();
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match.');
+            event.preventDefault();
+            return;
+        }
+    });
+</script>
+
 </body>
 </html>
