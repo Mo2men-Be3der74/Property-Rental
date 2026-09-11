@@ -37,5 +37,3 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')->name('logout');
 
-Route::get('/logout', [AuthController::class, 'logout'])
-    ->middleware('auth')->name('logout');
