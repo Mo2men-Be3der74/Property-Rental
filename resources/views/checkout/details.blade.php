@@ -28,9 +28,9 @@
     </div>
     <div class="content">
         <div class="title-card">
-            {{-- <img src="{{''}}" alt="{{data->location}}"> --}}
-            <div class="location"><i class="fa-solid fa-location-pin"></i> {{$data->location}}</div>
-            <div class="size"><i class="fa-solid fa-ruler"></i> {{$data->size}} m^2</div>
+            {{-- <img src="{{''}}" alt="{{flat->location}}"> --}}
+            <div class="location"><i class="fa-solid fa-location-pin"></i> {{$flat->location}}</div>
+            <div class="size"><i class="fa-solid fa-ruler"></i> {{$flat->size}} m^2</div>
         </div>
 
 
@@ -43,19 +43,19 @@
 
         <div class="your-information">
             <h2>Your Information</h2>
-            <form action="{{route('checkout.payment', ['flat' => $data->flat_id])}}" method="post">
+            <form action="{{route('checkout.payment', ['flat' => $flat->flat_id])}}" method="post">
                 @csrf
                 <div class="name">
                     <label for="name">Name</label>
-                    <input type="text" name="name" id="name" placeholder="John Doe">
+                    <input type="text" name="name" id="name" placeholder="John Doe" value="{{ Auth::user()->name }}">
                 </div>
                 <div class="email">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="M5oNt@example.com">
+                    <input type="email" name="email" id="email" placeholder="M5oNt@example.com" value="{{ Auth::user()->email }}">
                 </div>
                 <div class="phone">
                     <label for="phone">Phone</label>
-                    <input type="tel" name="phone" id="phone" placeholder="123-456-7890">
+                    <input type="tel" name="phone" id="phone" placeholder="123-456-7890" value="{{ Auth::user()->phone }}">
                 </div>
                 <div class="start">
                     <label for="start">Start Date</label>

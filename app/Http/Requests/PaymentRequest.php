@@ -25,7 +25,7 @@ class PaymentRequest extends FormRequest
         return [
             'name' => ['required', 'regex:/^[a-zA-Z\s]+$/'],
             'email' => ['required', 'email', 'regex:/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/'],
-            'phone' => ['required', 'regex:/^(010|011|012|015)[0-9]{8,}$/'],
+            'phone' => ['nullable', 'regex:/^(010|011|012|015)[0-9]{8,}$/'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date', 'after:start_date'],
         ];
