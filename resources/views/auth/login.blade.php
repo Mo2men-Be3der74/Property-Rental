@@ -88,5 +88,29 @@
 
 </div>
 
+<script>
+    var form = document.querySelector('form');
+
+    form.addEventListener('submit', function (event) {
+
+        var email = document.querySelector('input[name="email"]').value.trim();
+        var password = document.querySelector('input[name="password"]').value;
+
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+            alert('Please enter a valid email address.');
+            event.preventDefault();
+            return;
+        }
+
+        if (password === '') {
+            alert('Please enter your password.');
+            event.preventDefault();
+            return;
+        }
+    });
+</script>
+
 </body>
 </html>
