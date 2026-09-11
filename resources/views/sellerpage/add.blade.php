@@ -29,7 +29,7 @@
             </div>
             <div class="nav-actions">
                 <a href="#" class="nav-link">Explore</a>
-                <a href="#" class="nav-link">Become a Host</a>
+                <a href="{{route('seller.create')}}" class="nav-link">Become a Host</a>
                 <a href="{{ route('seller.index') }}" class="nav-link">Seller Hub</a>
                 <div class="superhost-badge">
                     <span class="dot-green"></span>
@@ -88,7 +88,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('seller.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="addPropertyForm" action="{{ route('seller.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-section-title">General Information</div>
@@ -111,6 +111,7 @@
                                 required
                             >
                         </div>
+                        <span class="input-error-msg" id="category_error"></span>
                     </div>
 
                     <div class="form-group">
@@ -124,11 +125,12 @@
                                 name="location"
                                 id="location"
                                 class="form-input"
-                                placeholder="e.g. Aspen, Colorado"
+                                placeholder="e.g. Country, City"
                                 value="{{ old('location') }}"
                                 required
                             >
                         </div>
+                        <span class="input-error-msg" id="location_error"></span>
                     </div>
                 </div>
 
@@ -153,6 +155,7 @@
                                 required
                             >
                         </div>
+                        <span class="input-error-msg" id="size_error"></span>
                     </div>
 
                     <div class="form-group">
@@ -172,6 +175,7 @@
                                 required
                             >
                         </div>
+                        <span class="input-error-msg" id="price_per_month_error"></span>
                     </div>
                 </div>
 
@@ -194,6 +198,7 @@
                             required
                         >
                     </label>
+                    <span class="input-error-msg" id="img_error"></span>
                 </div>
 
                 <div class="form-submit-row">
@@ -278,14 +283,7 @@
         </div>
     </footer>
 
-    <script>
-        document.getElementById('img_file').addEventListener('change', function(e) {
-            if (this.files.length > 0) {
-                document.getElementById('dropzoneText').textContent = 'Selected: ' + this.files[0].name;
-                document.getElementById('dropzoneContainer').style.borderColor = '#16A34A';
-            }
-        });
-    </script>
+    <script src="{{ asset('checkout/assets/js/seller-form.js') }}"></script>
 </body>
 </html>
 

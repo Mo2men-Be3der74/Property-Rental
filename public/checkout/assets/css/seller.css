@@ -909,6 +909,28 @@ body {
     box-shadow: 0 0 0 3px rgba(255, 138, 77, 0.15);
 }
 
+.form-input.is-invalid {
+    border-color: #DC2626;
+    background-color: #FEF2F2;
+}
+
+.form-input.is-invalid:focus {
+    border-color: #DC2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+.input-error-msg {
+    color: #DC2626;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.35rem;
+    display: none;
+}
+
+.input-error-msg.active {
+    display: block;
+}
+
 .input-icon-wrap:focus-within i {
     color: #FF8A4D;
 }

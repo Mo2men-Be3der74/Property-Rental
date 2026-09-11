@@ -14,38 +14,26 @@ class Sellercontroller extends Controller
     {
         $user = Auth::user();
         if (!$user) {
-            $user = User::first();
-            if (!$user) {
-                $user = new User();
-                $user->name = 'Host';
-                $user->img = 'checkout/assets/images/user.jpg';
-            }
+            return redirect()->route('login');
         }
-        if ($user->user_id) {
-            $flats = Flat::where('owner_id', $user->user_id)->latest()->get();
-        } else {
-            $flats = collect();
-        }
+        $flats = Flat::where('owner_id', $user->user_id)->latest()->get();
         return view('sellerpage.seller', compact('flats', 'user'));
     }
+
     public function create()
     {
         $user = Auth::user();
         if (!$user) {
-            $user = User::first();
-            if (!$user) {
-                $user = new User();
-                $user->name = 'Host';
-                $user->img = 'checkout/assets/images/user.jpg';
-            }
+            return redirect()->route('login');
         }
         return view('sellerpage.add', compact('user'));
     }
+
     public function store(SellerRequest $request)
     {
         $user = Auth::user();
         if (!$user) {
-            $user = User::first();
+            return redirect()->route('login');
         }
         Flat::create([
             'owner_id' => $user->user_id,
@@ -53,29 +41,26 @@ class Sellercontroller extends Controller
             'size' => $request->size,
             'price_per_month' => $request->price_per_month,
             'location' => $request->location,
-            'img' =>  $request->file('img')->store('images'),
+            'img' => $request->file('img')->store('images'),
         ]);
         return redirect()->route('seller.index');
     }
+
     public function edit($flat_id)
     {
         $user = Auth::user();
         if (!$user) {
-            $user = User::first();
-            if (!$user) {
-                $user = new User();
-                $user->name = 'Host';
-                $user->img = 'checkout/assets/images/user.jpg';
-            }
+            return redirect()->route('login');
         }
         $flat = Flat::where('flat_id', $flat_id)->firstOrFail();
         return view('sellerpage.edit', compact('flat', 'user'));
     }
+
     public function update(SellerRequest $request, $flat_id)
     {
         $user = Auth::user();
         if (!$user) {
-            $user = User::first();
+            return redirect()->route('login');
         }
         $flat = Flat::where('flat_id', $flat_id)->firstOrFail();
         if ($request->hasFile('img')) {
@@ -88,8 +73,13 @@ class Sellercontroller extends Controller
         $flat->save();
         return redirect()->route('seller.index');
     }
+
     public function destroy($flat_id)
     {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login');
+        }
         $flat = Flat::where('flat_id', $flat_id)->firstOrFail();
         $flat->delete();
         return redirect()->route('seller.index');
