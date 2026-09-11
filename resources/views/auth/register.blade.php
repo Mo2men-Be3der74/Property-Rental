@@ -83,14 +83,6 @@
             value="{{ old('phone') }}"
         >
 
-        <label>SSN</label>
-        <input
-            type="text"
-            name="ssn"
-            value="{{ old('ssn') }}"
-            required
-        >
-
         <label>Password</label>
         <input
             type="password"
