@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Sellercontroller;
 use Illuminate\Support\Facades\Route;
@@ -17,3 +18,15 @@ Route::prefix('/seller')->controller(Sellercontroller::class)->name('seller.')->
     Route::get('/', 'seller')->name('index');
 });
 
+Route::get('/login', [AuthController::class, 'showLogin'])
+    ->name('login');
+
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/register', [AuthController::class, 'showRegister'])
+    ->name('register');
+
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->name('logout');
