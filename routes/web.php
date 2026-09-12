@@ -15,7 +15,7 @@ Route::prefix('/checkout')->middleware('auth')->controller(CheckoutController::c
     Route::post('/{flat}/confirm', 'confirm')->where('flat', '[0-9]+')->name('confirm');
 });
 
-Route::prefix('/seller')->controller(Sellercontroller::class)->name('seller.')->group(function () {
+Route::prefix('/seller')->middleware('auth')->controller(Sellercontroller::class)->name('seller.')->group(function () {
     Route::get('/', 'seller')->name('index');
     Route::get('/add', 'create')->name('create');
     Route::post('/add', 'store')->name('store');

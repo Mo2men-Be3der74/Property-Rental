@@ -13,12 +13,17 @@ class SellerRequest extends FormRequest
 
     public function rules(): array
     {
+        $imageRule = 'required|image|mimes:jpeg,png,jpg,webp';
+        if ($this->isMethod('put') || $this->isMethod('patch')) {
+            $imageRule = 'nullable|image|mimes:jpeg,png,jpg,webp';
+        }
+
         return [
             'category' => 'required|string',
             'size' => 'required|numeric|min:1',
             'price_per_month' => 'required|numeric|min:0',
             'location' => 'required|string',
-            'img' => 'required|image|mimes:jpeg,png,jpg,webp',
+            'img' => $imageRule,
         ];
     }
 }
