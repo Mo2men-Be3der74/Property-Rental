@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends Model
 {
@@ -17,4 +18,8 @@ class Transaction extends Model
         'tenant_id',
         'status',
     ];
+
+    public function flat(): BelongsTo {
+        return $this->belongsTo(Flat::class, 'flat_id', 'flat_id');
+    }
 }

@@ -35,15 +35,13 @@
 </nav>
 
     <a href="profile.html" class="login">
-    Profile
-</a>
-
+        Profile
+    </a>
 </header>
 <main>
 
 
     <section class="profile-section">
-
         <div class="profile-info">
 
 
@@ -66,7 +64,7 @@
 
 
                 <div class="avatar">
-                    AN
+                    {{ strtoupper(substr($user->name, 0, 2)) }}
                 </div>
 
 
@@ -85,16 +83,16 @@
                 </span>
 
 
-                <button
-                    class="edit-btn"
-                    onclick="enableEdit()">
-
-                    Edit Profile
-
-                </button>
 
 
             </div>
+
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="logout-btn">
+                    Log Out
+                </button>
+            </form>
 
 
         </div>
@@ -111,77 +109,86 @@
                 Account Details
             </h2>
 
+            @if (session('success'))
+                <div class="alert-success-msg">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-            <form id="profileForm">
+            @if ($errors->any())
+                <div class="alert-error-msg">
+                    @foreach ($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
 
+            <form id="profileForm" action="{{ route('profile.update') }}" method="POST">
+                @csrf
+                @method('PUT')
 
                 <div class="form-row">
-
-
-                    <div class="field">
-
-                        <label>
+                    <div class="field full">
+                        <label for="name">
                             Name
                         </label>
-
                         <input
                             type="text"
                             id="name"
-                            value="{{$user->name}}"
-                            disabled>
-
+                            name="name"
+                            value="{{ $user->name }}"
+                            >
+                        <span class="error-msg" id="nameError">Name must contain only letters and spaces (at least 2 characters).</span>
                     </div>
-
-
                 </div>
 
-
-
                 <div class="field full">
-
-                    <label>
+                    <label for="email">
                         Email Address
                     </label>
-
                     <input
                         type="email"
                         id="email"
+                        name="email"
                         value="{{ $user->email }}"
-                        disabled>
-
+                        >
+                    <span class="error-msg" id="emailError">Please enter a valid email address.</span>
                 </div>
 
-
+                <div class="field full">
+                    <label for="password">
+                        Password <span style="font-weight: normal; color: #888; text-transform: none;">(leave blank to keep current)</span>
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Leave blank to keep unchanged"
+                        >
+                    <span class="error-msg" id="passwordError">Password must be at least 8 characters with uppercase, lowercase, and a number.</span>
+                </div>
 
                 <div class="field full">
-
-                    <label>
+                    <label for="phone">
                         Phone Number
                     </label>
-
                     <input
                         type="text"
                         id="phone"
+                        name="phone"
                         value="{{ $user->phone }}"
-                        disabled>
-
+                        placeholder="01012345678"
+                        >
+                    <span class="error-msg" id="phoneError">Egyptian phone must be 11 digits starting with 010, 011, 012, or 015.</span>
                 </div>
-
-
-
-
 
                 <button
                     type="submit"
                     class="save-btn"
                     id="saveBtn"
-                    disabled>
-
+                    >
                     Save Changes
-
                 </button>
-
-
             </form>
 
 
@@ -190,106 +197,47 @@
 
     </section>
 
-    <section class="account-section">
-
-
+    <section class="transactions-section">
         <p class="eyebrow">
-            QUICK ACCESS
+            BOOKINGS
         </p>
 
-
         <h2>
-            Account
+            My Transactions
         </h2>
 
+        <div class="transactions-list">
+            @if (count($transactions) > 0)
+                @foreach ($transactions as $transaction)
+                    <div class="transaction-card">
+                        <div class="transaction-header">
+                            <div class="transaction-location">
+                                <h3>{{ $transaction->flat->location ?? 'Location Unavailable' }}</h3>
+                            </div>
+                            <div class="transaction-price">
+                                ${{ number_format($transaction->total_price, 2) }}
+                            </div>
+                        </div>
 
-        <div class="account-grid">
-
-
-            <div class="account-card">
-
-                <span>01</span>
-
-                <div>
-
-                    <h3>
-                        My Bookings
-                    </h3>
-
-                    <p>
-                        View your current and previous bookings.
-                    </p>
-
+                        <div class="transaction-dates">
+                            <div class="date-item">
+                                <span class="date-label">Start Date:</span>
+                                <span class="date-value">{{ $transaction->start_date }}</span>
+                            </div>
+                            <div class="date-item">
+                                <span class="date-label">End Date:</span>
+                                <span class="date-value">{{ $transaction->end_date }}</span>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <div class="no-transactions">
+                    <p>No transactions found.</p>
                 </div>
-
-            </div>
-
-
-
-            <div class="account-card">
-
-                <span>02</span>
-
-                <div>
-
-                    <h3>
-                        Favorites
-                    </h3>
-
-                    <p>
-                        View properties you saved.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="account-card">
-
-                <span>03</span>
-
-                <div>
-
-                    <h3>
-                        Payment Methods
-                    </h3>
-
-                    <p>
-                        Manage your payment information.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="account-card">
-
-                <span>04</span>
-
-                <div>
-
-                    <h3>
-                        Change Password
-                    </h3>
-
-                    <p>
-                        Update your account password.
-                    </p>
-
-                </div>
-
-            </div>
-
-
+            @endif
         </div>
-
-
     </section>
-
 
 </main>
 
@@ -340,30 +288,59 @@
 
 
 <script>
-    function enableEdit() {
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const phone = document.getElementById('phone');
 
-        document.getElementById("name").disabled = false;
-        document.getElementById("email").disabled = false;
-        document.getElementById("phone").disabled = false;
+    const form = document.getElementById('profileForm');
 
-        document.getElementById("saveBtn").disabled = false;
+    const nameRegEx = /^[a-zA-Z\s]+$/;
+    const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegEx = /^(010|011|012|015)[0-9]{8}$/;
+    const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    }
 
-
-    document.getElementById("profileForm").addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        document.getElementById("name").disabled = true;
-        document.getElementById("email").disabled = true;
-        document.getElementById("phone").disabled = true;
-
-        document.getElementById("saveBtn").disabled = true;
-
-        alert("Profile updated successfully!");
-
+    name.addEventListener('input', () => {
+        if (nameRegEx.test(name.value)) {
+            name.classList.remove('invalid');
+            name.classList.add('valid');
+        } else {
+            name.classList.add('invalid');
+            name.classList.remove('valid');
+        }
     });
+
+    email.addEventListener('input', () => {
+        if (emailRegEx.test(email.value)) {
+            email.classList.remove('invalid');
+            email.classList.add('valid');
+        } else {
+            email.classList.add('invalid');
+            email.classList.remove('valid');
+        }
+    });
+
+    password.addEventListener('input', () => {
+        if (passwordRegEx.test(password.value)) {
+            password.classList.remove('invalid');
+            password.classList.add('valid');
+        } else {
+            password.classList.add('invalid');
+            password.classList.remove('valid');
+        }
+    });
+
+    phone.addEventListener('input', () => {
+        if (phoneRegEx.test(phone.value)) {
+            phone.classList.remove('invalid');
+            phone.classList.add('valid');
+        } else {
+            phone.classList.add('invalid');
+            phone.classList.remove('valid');
+        }
+    });
+
 </script>
 
 </body>

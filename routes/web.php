@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Sellercontroller;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,4 +38,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')->name('logout');
 
-Route::get('/profile', [AuthController::class, 'profile'])->middleware('auth')->name('profile');
+Route::controller(ProfileController::class)->middleware('auth')->prefix('/profile')->name('profile.')->group(function () {
+    Route::get('/', 'profile')->name('index');
+    Route::put('/update', 'update')->name('update');
+});
