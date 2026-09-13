@@ -28,9 +28,9 @@
                 </div>
             </div>
             <div class="nav-actions">
-                <a href="#" class="nav-link">Explore</a>
+                <a href="{{route('home')}}" class="nav-link">Explore</a>
                 <a href="{{route('seller.create')}}" class="nav-link">Become a Host</a>
-                <a href="{{ route('seller.index') }}" class="nav-link">Seller Hub</a>
+                <a href="{{route('seller.index')}}" class="nav-link">Seller Hub</a>
                 <div class="superhost-badge">
                     <span class="dot-green"></span>
                     <span>Superhost Active</span>
