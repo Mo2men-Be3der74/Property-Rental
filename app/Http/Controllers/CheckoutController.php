@@ -35,7 +35,9 @@ class CheckoutController extends Controller
             return redirect()->route('home')->with('error', 'You cannot book your own flat.');
         }
 
-        return view('checkout.details', compact('flat'));
+        $user = Auth::user();
+
+        return view('checkout.details', compact('flat', 'user'));
     }
 
     public function payment($id, PaymentRequest $request) {
@@ -70,7 +72,9 @@ class CheckoutController extends Controller
 
         $totalPrice = $pricePerMonth * $months;
 
-        return view('checkout.payment', compact('flat', 'totalPrice', 'data'));
+        $user = Auth::user();
+
+        return view('checkout.payment', compact('flat', 'totalPrice', 'data', 'user'));
     }
 
     public function confirm($id, Request $request)

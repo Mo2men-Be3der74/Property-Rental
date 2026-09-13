@@ -201,6 +201,10 @@ body {
     text-decoration: none;
 }
 
+.nav-profile:hover .profile-name {
+    color: #FF8A4D;
+}
+
 .profile-avatar {
     width: 36px;
     height: 36px;

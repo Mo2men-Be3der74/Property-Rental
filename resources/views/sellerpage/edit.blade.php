@@ -28,22 +28,10 @@
                 </div>
             </div>
             <div class="nav-actions">
-                <a href="#" class="nav-link">Explore</a>
-                <a href="{{ route('seller.create') }}" class="nav-link">Become a Host</a>
-                <a href="{{ route('seller.index') }}" class="nav-link">Seller Hub</a>
-                <div class="superhost-badge">
-                    <span class="dot-green"></span>
-                    <span>Superhost Active</span>
-                </div>
-                <a href="#" class="icon-btn" title="Saved Favorites" aria-label="Saved Favorites">
-                    <i class="fa-regular fa-heart"></i>
-                </a>
-                <a href="#" class="icon-btn" title="Notifications" aria-label="Notifications">
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="notification-dot"></span>
-                </a>
-
-                <div class="nav-profile">
+                <a href="{{route('home')}}" class="nav-link">Explore</a>
+                <a href="{{route('seller.create')}}" class="nav-link">Become a Host</a>
+                <a href="{{route('seller.index')}}" class="nav-link">Seller Hub</a>
+                <a href="{{ route('profile.index') }}" class="nav-profile">
                     <img
                         src="{{ asset($user->img) }}"
                         alt="{{ $user->name }}"
@@ -53,7 +41,7 @@
                     <div class="profile-info">
                         <span class="profile-name">{{ $user->name }}</span>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </nav>
