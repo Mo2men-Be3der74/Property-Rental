@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PropertyHub - Find a place you'll love to call home</title>
-    
+
     <!-- Bootstrap CSS v5 Utility Classes -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
+
     <!-- Custom CSS Stylesheet matching seller dashboard -->
     <link rel="stylesheet" href="{{ asset('home/assets/css/home.css') }}">
 </head>
@@ -68,14 +68,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="hero-image-preview">
                 <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80" alt="Featured Home">
                 <div class="hero-image-badge">FEATURED HOME • The Willow Residence</div>
             </div>
         </section>
 
- 
+
 
 
         <!-- Featured Properties Section -->
@@ -93,7 +93,7 @@
                 <a href="{{ route('checkout.details', $flat->flat_id) }}" class="property-card-item" >
                     <div class="card-img-container">
                         <span class="card-badge-pill">{{ ($flat->category)}}</span>
-                        <img src="{{ $flat->img }}" alt="{{ $flat->owner_id }}">
+                        <img src="{{ asset('storage/' . $flat->img) }}" alt="{{ $flat->owner_id }}">
                     </div>
                     <div class="card-content-body">
                         <div><span> {{ $flat->location }} </span></div>
