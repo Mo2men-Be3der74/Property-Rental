@@ -98,7 +98,7 @@
                     <div class="card-content-body">
                         <div><span> {{ $flat->location }} </span></div>
                         <div class="card-specs-row">
-                             <div><span>{{ $flat->size }}</span> <span> ft</span></div>
+                             <div><span>{{ $flat->size }}</span> <span> m²</span></div>
                         </div>
                         <div class="card-footer-row">
                             <div class="card-price-text"><span>Price: </span>{{ $flat->price_per_month }} <span> /month</span></div>
