@@ -6,7 +6,7 @@ use App\Http\Controllers\Sellercontroller;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('guest');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/search', [HomeController::class, 'search'])->name('search')->middleware('guest');
 

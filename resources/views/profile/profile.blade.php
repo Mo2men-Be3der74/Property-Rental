@@ -197,47 +197,6 @@
 
     </section>
 
-    <section class="transactions-section">
-        <p class="eyebrow">
-            BOOKINGS
-        </p>
-
-        <h2>
-            My Transactions
-        </h2>
-
-        <div class="transactions-list">
-            @if (count($transactions) > 0)
-                @foreach ($transactions as $transaction)
-                    <div class="transaction-card">
-                        <div class="transaction-header">
-                            <div class="transaction-location">
-                                <h3>{{ $transaction->flat->location ?? 'Location Unavailable' }}</h3>
-                            </div>
-                            <div class="transaction-price">
-                                ${{ number_format($transaction->total_price, 2) }}
-                            </div>
-                        </div>
-
-                        <div class="transaction-dates">
-                            <div class="date-item">
-                                <span class="date-label">Start Date:</span>
-                                <span class="date-value">{{ $transaction->start_date }}</span>
-                            </div>
-                            <div class="date-item">
-                                <span class="date-label">End Date:</span>
-                                <span class="date-value">{{ $transaction->end_date }}</span>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <div class="no-transactions">
-                    <p>No transactions found.</p>
-                </div>
-            @endif
-        </div>
-    </section>
 
 </main>
 
