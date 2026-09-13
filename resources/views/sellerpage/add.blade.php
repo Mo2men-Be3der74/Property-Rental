@@ -31,7 +31,7 @@
                 <a href="{{route('home')}}" class="nav-link">Explore</a>
                 <a href="{{route('seller.create')}}" class="nav-link">Become a Host</a>
                 <a href="{{route('seller.index')}}" class="nav-link">Seller Hub</a>
-                <div class="nav-profile">
+                <a href="{{ route('profile.index') }}" class="nav-profile">
                     <img
                         src="{{ asset($user->img) }}"
                         alt="{{ $user->name }}"
@@ -41,7 +41,7 @@
                     <div class="profile-info">
                         <span class="profile-name">{{ $user->name }}</span>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </nav>
