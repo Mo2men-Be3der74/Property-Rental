@@ -10,6 +10,7 @@ use Ramsey\Uuid\Type\Decimal;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Transaction;
 use App\Models\Reciept;
+use App\App\Http\Controller\HomeController;
 
 class CheckoutController extends Controller
 {
@@ -23,15 +24,15 @@ class CheckoutController extends Controller
         $someoneReserved = Transaction::where('flat_id', $flat->flat_id)->where('status', 'completed')->exists();
 
         if ($alreadyReserved) {
-            return redirect()->route('welcome')->with('error', 'You have already reserved this flat.');
+            return redirect()->route('home')->with('error', 'You have already reserved this flat.');
         }
 
         if ($someoneReserved) {
-            return redirect()->route('welcome')->with('error', 'This flat is already reserved by another tenant.');
+            return redirect()->route('home')->with('error', 'This flat is already reserved by another tenant.');
         }
 
         if (Auth::user()->user_id === $flat->owner_id) {
-            return redirect()->route('welcome')->with('error', 'You cannot book your own flat.');
+            return redirect()->route('home')->with('error', 'You cannot book your own flat.');
         }
 
         return view('checkout.details', compact('flat'));
@@ -54,15 +55,15 @@ class CheckoutController extends Controller
         ->exists();
 
         if ($alreadyReserved) {
-            return redirect()->route('welcome')->with('error', 'You have already reserved this flat.');
+            return redirect()->route('home')->with('error', 'You have already reserved this flat.');
         }
 
         if ($someoneReserved) {
-            return redirect()->route('welcome')->with('error', 'This flat is already reserved by another tenant.');
+            return redirect()->route('home')->with('error', 'This flat is already reserved by another tenant.');
         }
 
         if (Auth::user()->user_id === $flat->owner_id) {
-            return redirect()->route('welcome')->with('error', 'You cannot book your own flat.');
+            return redirect()->route('home')->with('error', 'You cannot book your own flat.');
         }
 
         $pricePerMonth = (float) $flat->price_per_month;
@@ -83,15 +84,15 @@ class CheckoutController extends Controller
         $someoneReserved = Transaction::where('flat_id', $flat->flat_id)->where('status', 'completed')->exists();
 
         if ($alreadyReserved) {
-            return redirect()->route('welcome')->with('error', 'You have already reserved this flat.');
+            return redirect()->route('home')->with('error', 'You have already reserved this flat.');
         }
 
         if ($someoneReserved) {
-            return redirect()->route('welcome')->with('error', 'This flat is already reserved by another tenant.');
+            return redirect()->route('home')->with('error', 'This flat is already reserved by another tenant.');
         }
 
         if (Auth::user()->user_id === $flat->owner_id) {
-            return redirect()->route('welcome')->with('error', 'You cannot book your own flat.');
+            return redirect()->route('home')->with('error', 'You cannot book your own flat.');
         }
 
         $transaction = [
@@ -114,7 +115,7 @@ class CheckoutController extends Controller
 
         Reciept::create($reciept);
 
-        return redirect()->route('welcome')->with('success', 'Payment successful! Transaction ID: ' . $transaction->transaction_id);
+        return redirect()->route('home')->with('success', 'Payment successful! Transaction ID: ' . $transaction->transaction_id);
 
     }
 }
