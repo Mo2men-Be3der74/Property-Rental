@@ -75,7 +75,52 @@
             </div>
         </section>
 
- 
+        <section>
+                   <!-- Booking Filter Search Bar Component -->
+        <div class="search-bar-box">
+            <div class="search-field-group">
+                <span class="search-field-label">Location</span>
+                <div class="search-field-input-wrap">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <input type="text" placeholder="City or neighborhood">
+                </div>
+            </div>
+            <div class="search-field-group">
+                <span class="search-field-label">Move In</span>
+                <div class="search-field-input-wrap">
+                    <i class="fa-regular fa-calendar"></i>
+                    <input type="text" placeholder="Add date">
+                </div>
+            </div>
+            <div class="search-field-group">
+                <span class="search-field-label">Move Out</span>
+                <div class="search-field-input-wrap">
+                    <i class="fa-regular fa-calendar"></i>
+                    <input type="text" placeholder="Add date">
+                </div>
+            </div>
+            <div class="search-field-group">
+                <span class="search-field-label">Property Type</span>
+                <div class="search-field-input-wrap">
+                    <select>
+                        <option>Any type</option>
+                        <option>Villa</option>
+                        <option>Apartment</option>
+                        <option>Studio</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-field-group">
+                <span class="search-field-label">Price</span>
+                <div class="search-field-input-wrap">
+                    <input type="text" value="$1,200 - $4,500">
+                </div>
+            </div>
+            <button class="search-submit-btn">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+            </button>
+        </div>
+        </section>
 
 
         <!-- Featured Properties Section -->
