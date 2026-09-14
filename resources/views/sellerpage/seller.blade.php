@@ -20,13 +20,16 @@
                 </div>
                 <span class="brand-name">PropertyHub</span>
             </a>
-            <div class="nav-search">
-                <div class="search-input-wrapper">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search properties, guests..." aria-label="Search properties">
-                    <span class="search-kbd">⌘K</span>
+            <form action="{{ route('search') }}">
+                <div class="nav-search">
+                    <div class="search-input-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search properties, guests..." aria-label="Search properties" value="request('search')">
+                        <span class="search-kbd">⌘K</span>
+                    </div>
                 </div>
-            </div>
+            </form>
+
             <div class="nav-actions">
                 <a href="{{route('home')}}" class="nav-link">Explore</a>
                 <a href="{{route('seller.create')}}" class="nav-link">Become a Host</a>
