@@ -22,12 +22,13 @@
                 <div class="brand-icon">
                     <i class="fa-solid fa-building-user"></i>
                 </div>
-                <span class="brand-name">PropertyHub</span>
+                <span class="brand-name">PropertyHub</span>            
             </a>
 
 
             <div class="nav-actions">
                 <a href="#" class="nav-link">Home</a>
+                <a href="{{ route('search') }}" class="nav-link">Search</a>
                 <a href="#explore-section" class="nav-link">Explore</a>
                 <a href="{{ route('seller.index') }}" class="nav-link">Become a Seller</a>
                 <a href="#" class="icon-btn" title="Notifications">
@@ -75,54 +76,7 @@
             </div>
         </section>
 
-        <section>
-                   <!-- Booking Filter Search Bar Component -->
-        <div class="search-bar-box">
-            <div class="search-field-group">
-                <span class="search-field-label">Location</span>
-                <div class="search-field-input-wrap">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <input type="text" placeholder="City or neighborhood">
-                </div>
-            </div>
-            <div class="search-field-group">
-                <span class="search-field-label">Move In</span>
-                <div class="search-field-input-wrap">
-                    <i class="fa-regular fa-calendar"></i>
-                    <input type="text" placeholder="Add date">
-                </div>
-            </div>
-            <div class="search-field-group">
-                <span class="search-field-label">Move Out</span>
-                <div class="search-field-input-wrap">
-                    <i class="fa-regular fa-calendar"></i>
-                    <input type="text" placeholder="Add date">
-                </div>
-            </div>
-            <div class="search-field-group">
-                <span class="search-field-label">Property Type</span>
-                <div class="search-field-input-wrap">
-                    <select>
-                        <option>Any type</option>
-                        <option>Villa</option>
-                        <option>Apartment</option>
-                        <option>Studio</option>
-                    </select>
-                </div>
-            </div>
-            <div class="search-field-group">
-                <span class="search-field-label">Price</span>
-                <div class="search-field-input-wrap">
-                    <input type="text" value="$1,200 - $4,500">
-                </div>
-            </div>
-            <button class="search-submit-btn">
-                <i class="fa-solid fa-magnifying-glass"></i> Search
-            </button>
-        </div>
-        </section>
-
-
+    
         <!-- Featured Properties Section -->
         <section id="explore-section" class="d-flex flex-column gap-3">
             <div class="section-header-flex">
@@ -138,7 +92,7 @@
                 <a href="{{ route('checkout.details', $flat->flat_id) }}" class="property-card-item" >
                     <div class="card-img-container">
                         <span class="card-badge-pill">{{ ($flat->category)}}</span>
-                        <img src="{{ asset('storage/' . $flat->img) }}" alt="{{ $flat->owner_id }}">
+                        <img src="{{  $flat->img ? asset($flat->img) : asset('images/default-flat.jpg') }}" alt="{{ $flat->owner_id }}">
                     </div>
                     <div class="card-content-body">
                         <div><span> {{ $flat->location }} </span></div>
@@ -161,7 +115,7 @@
             </div>
             <div class="trust-features-row">
                 <div class="trust-feature-col">
-                    <div class="trust-icon-box"><i class="fa-solid fa-shield-check"></i></div>
+                    <div class="trust-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
                     <h3 class="trust-feature-title">Verified Properties</h3>
                     <p class="trust-feature-desc">Every listing is reviewed for quality and accuracy.</p>
                 </div>
